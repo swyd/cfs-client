@@ -138,11 +138,11 @@ angular
                             $(element).modal('hide');
                     });
 
-                    //							$(element).on('shown.bs.modal', function() {
-                    //								scope.$apply(function() {
-                    //									scope.$parent[attrs.visible] = true;
-                    //								});
-                    //							});
+                    //                          $(element).on('shown.bs.modal', function() {
+                    //                              scope.$apply(function() {
+                    //                                  scope.$parent[attrs.visible] = true;
+                    //                              });
+                    //                          });
 
                     $(element).on('hidden.bs.modal', function() {
                         scope.$apply(function() {
@@ -158,6 +158,7 @@ angular
             $rootScope.$on('$viewContentLoaded', function() {
                 delete $rootScope.error;
             });
+
 
             $rootScope.hasRole = function(role) {
 
@@ -181,7 +182,7 @@ angular
 
             /* Try getting valid user from cookie or go to login page */
             var originalPath = $location.path();
-            //					$location.path("/login");
+            //                  $location.path("/login");
             var authToken = $cookieStore.get('authToken');
             if (authToken !== undefined) {
                 $rootScope.authToken = authToken;
@@ -190,8 +191,13 @@ angular
                     $location.path(originalPath);
                 });
             }
-
             $rootScope.initialized = true;
+            $rootScope.isCollapsed = true;
+
+            $rootScope.checkCollapsed = function(){
+                console.log($rootScope.isCollapsed);
+                $rootScope.isCollapsed = !$rootScope.isCollapsed;
+            };
         });
 
 function IndexController($scope, $http, NewsService) {
