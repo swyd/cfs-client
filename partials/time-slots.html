@@ -22,9 +22,11 @@
                         </div>
                     </div>
                     <h1 align="center">Prijavljeni</h1>
+                    </br>
+                    </br>
                 </div>
                 <div class="col-xs-12">
-                    <table ng-table="vm.appointments" class="table" show-filter="true">
+                    <table ng-table="vm.appointments" class="ui table compact inverted segment" show-filter="true">
                         <tr ng-repeat="appointment in $data">
                             <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">{{appointment.name}}</td>
                             <td title="'Surname'" filter="{ surname: 'text'}" sortable="'surname'">{{appointment.surname}}</td>

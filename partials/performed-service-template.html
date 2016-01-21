@@ -39,7 +39,7 @@
                             <div class="col-xs-12">
                                 <hr>
                             </div>
-                            <table ng-table="vm.contracts" class="table" show-filter="true">
+                            <table ng-table="vm.contracts" class="ui table compact inverted segment" show-filter="true">
                                 <tr ng-repeat="contract in $data">
                                     <td title="'Broj ugovora'" filter="{ id: 'number'}" sortable="'id'">{{contract.id}}</td>
                                     <td title="'Ime i prezime'" filter="{ name: 'text'}" sortable="'name'">{{contract.name}}</td>

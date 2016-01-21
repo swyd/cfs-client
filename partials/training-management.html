@@ -37,9 +37,8 @@
                     </div>
                     <br />
                     <br />
-                    <br />
-                    <div class="col-xs-12">
-                        <table ng-table="vm.trainings" class="table" show-filter="true" ng-table-columns-binding="user.cols">
+                    <div class="col-xs-12" style="margin-top:20px;">
+                        <table ng-table="vm.trainings" class="ui table compact inverted segment" show-filter="true" ng-table-columns-binding="user.cols">
                             <tr ng-repeat="training in $data">
                                 <td title="'Name'" filter="{ name: 'text'}" sortable="'name'">{{training.name}}</td>
                                 <td title="'Surname'" filter="{ surname: 'text'}" sortable="'surname'">{{training.surname}}</td>

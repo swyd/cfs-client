@@ -69,7 +69,8 @@
                                     <input type="checkbox" ng-if="col.title" ng-model-options="{ getterSetter: true }" ng-model="col.show" /> {{col.title()}}
                                 </label>
                             </div>
-                            <table ng-table="vm.users" class="table" show-filter="true" ng-table-columns-binding="user.cols">
+                            </br>
+                            <table ng-table="vm.users" class="ui table compact inverted segment" show-filter="true" ng-table-columns-binding="user.cols">
                                 <tr ng-repeat="user in $data">
                                     <td title="'Ime'" filter="{ name: 'text'}" sortable="'id'">{{user.name}}</td>
                                     <td title="'Prezime'" filter="{ surname: 'text'}" sortable="'surname'">{{user.surname}}</td>
