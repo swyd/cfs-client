@@ -11,7 +11,7 @@
 
         vm.coaches = [];
         vm.types = [];
-        
+
         vm.editingInProgress = false;
         vm.createTimeslot = createTimeslot;
         vm.editTimeslot = editTimeslot;
@@ -35,11 +35,10 @@
             TSMService.getTimeslots().then(
                 function(data) {
                     data.filter(function(el) {
-                        // el.datePaid = $filter('date')(el.datePaid,
-                        //     "yyyy-MM-dd");
-                        // el.dateExpiring = $filter('date')(el.dateExpiring,
-                        //     "yyyy-MM-dd");
+                        el.coach = vm.coaches[el.coachId];
+                        el.tip = vm.types[el.type];
                     });
+
                     vm.timeslots = new NgTableParams({}, {
                         dataset: data
                     });
@@ -48,6 +47,7 @@
 
         function createTimeslot() {
             TSMService.createTimeslot(vm.timeslot).then(function(data) {
+                vm.timeslot.id = null;
                 vm.timeslot.limit = null;
                 vm.timeslot.startsAt = null;
                 vm.timeslot.isAdvanced = null;
@@ -62,6 +62,7 @@
 
         function deleteTimeslot(id) {
             TSMService.deleteTimeslot(id).then(function() {
+                vm.timeslot.id = null;
                 vm.timeslot.limit = null;
                 vm.timeslot.startsAt = null;
                 vm.timeslot.isAdvanced = null;
@@ -76,7 +77,7 @@
 
         function editTimeslot(timeslot) {
             vm.editingInProgress = true;
-
+            vm.timeslot.id = timeslot.id;
             vm.timeslot.limit = timeslot.limit;
             vm.timeslot.startsAt = timeslot.startsAt;
             vm.timeslot.isAdvanced = timeslot.isAdvanced;
@@ -90,7 +91,7 @@
         function saveEditedTimeslot() {
             TSMService.editTimeslot(vm.timeslot).then(function(data) {
                 vm.editingInProgress = false;
-
+                vm.timeslot.id = null;
                 vm.timeslot.limit = null;
                 vm.timeslot.startsAt = null;
                 vm.timeslot.isAdvanced = null;

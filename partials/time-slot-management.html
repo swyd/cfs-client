@@ -4,15 +4,15 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label>Pocinje u:</label>
-                    <input type="text" class="form-control" name="startsAt" ng-model="vm.timeslot.startsAt">
+                    <input type="text" class="form-control" style="width:50% !important;" name="startsAt" ng-model="vm.timeslot.startsAt">
                 </div>
                 <div class="form-group">
                     <label>Broj posetioca:</label>
-                    <input type="number" class="form-control" name="limit" ng-model="vm.timeslot.limit">
+                    <input type="number" class="form-control" style="width:50% !important;" name="limit" ng-model="vm.timeslot.limit">
                 </div>
                 <div class="form-group">
                     <label>Prioritet termina ?(sto veci broj to nizi prioritet)</label>
-                    <input type="number" class="form-control" name="priority" ng-model="vm.timeslot.priority">
+                    <input type="number" class="form-control" style="width:50% !important;" name="priority" ng-model="vm.timeslot.priority">
                 </div>
                 <div class="form-group">
                     <label for="type">Odaberite tip termina:</label>
@@ -36,20 +36,15 @@
                 <br />
                 <br />
                 <div class="col-xs-12">
-                    <h3>Odaberi kolone za prikaz</h3>
-                    <div style="margin-bottom: 20px">
-                        <label class="checkbox-inline" ng-repeat="col in timeslots.cols">
-                            <input type="checkbox" ng-if="col.title" ng-model-options="{ getterSetter: true }" ng-model="col.show" /> {{col.title()}}
-                        </label>
-                    </div>
-                    </br>
-                    <table ng-table="vm.timeslots" class="ui table compact inverted segment" show-filter="true" ng-table-columns-binding="timeslots.cols">
+                    <table ng-table="vm.timeslots" class="ui table compact inverted segment" show-filter="true" ng-table-columns-binding="table.cols">
                         <tr ng-repeat="timeslot in $data">
+                            <td title="'Tip'" filter="{ type : 'text'}" sortable="'type'">{{timeslot.tip}}</td>
                             <td title="'Pocinje u'" filter="{ startsAt : 'text'}" sortable="'startsAt'">{{timeslot.startsAt}}h</td>
-                            <td title="'Broj posetioca'" filter="{ limit: 'number'}" sortable="'limit'">{{timeslot.limit}}</td>
+                            <td title="'Broj posetioca'" filter="{ limit : 'number'}" sortable="'limit'">{{timeslot.limit}}</td>
                             <td title="'Prioritet termina'" filter="{ priority : 'number'}" sortable="'priority'">{{timeslot.priority}}</td>
-                            <td title="'Da li je aktivan'" filter="{ isActive: 'text'}" sortable="'isActive'">{{timeslot.isActive}}</td>
-                            <td title="'Da li je advanced'" filter="{ isAdvanced: 'text'}" sortable="'isAdvanced'">{{timeslot.isAdvanced}}</td>
+                            <td title="'Da li je aktivan'" filter="{ isActive : 'text'}" sortable="'isActive'">{{timeslot.isActive}}</td>
+                            <td title="'Da li je advanced'" filter="{ isAdvanced : 'text'}" sortable="'isAdvanced'">{{timeslot.isAdvanced}}</td>
+                            <td title="'Trener'" filter="{ coach : 'text'}" sortable="'coach'">{{timeslot.coach}}</td>
                             <td title="'Edit'">
                                 <button type="button" class="btn btn-primary" ng-click="vm.editTimeslot(timeslot)">Edit</button>
                             </td>
