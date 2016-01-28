@@ -4,8 +4,8 @@ angular
             'csf.services', 'daterangepicker', 'ngTable'
         ])
     .constant('cbu', {
-        baseUrl: 'http://ec2-52-27-30-179.us-west-2.compute.amazonaws.com:8080'
-        // baseUrl: 'http://localhost:8081'
+        // baseUrl: 'http://ec2-52-27-30-179.us-west-2.compute.amazonaws.com:8080'
+        baseUrl: 'http://localhost:8081'
     }).config(
         [
             '$routeProvider',
@@ -29,6 +29,12 @@ angular
                         '/user-management', {
                             templateUrl: 'partials/user-management-template.html',
                             controller: 'UsersController',
+                            controllerAs: 'vm'
+                        })
+                    .when(
+                        '/time-slot-management', {
+                            templateUrl: 'partials/time-slot-management.html',
+                            controller: 'TSMController',
                             controllerAs: 'vm'
                         })
                     .when(
@@ -71,7 +77,6 @@ angular
                                 } else {
                                     $rootScope.error = rejection.data.message;
                                 }
-
                                 return $q.reject(rejection);
                             }
                         };
@@ -194,13 +199,13 @@ angular
             $rootScope.initialized = true;
             $rootScope.isCollapsed = true;
 
-            $rootScope.checkCollapsed = function(){
+            $rootScope.checkCollapsed = function() {
                 console.log($rootScope.isCollapsed);
                 $rootScope.isCollapsed = !$rootScope.isCollapsed;
             };
         });
 
-function IndexController($scope, $http, NewsService) {
+function IndexController($scope, $http) {
     var vm = this;
     // vm.docs = [];
 
@@ -213,29 +218,29 @@ function IndexController($scope, $http, NewsService) {
     // });
 };
 
-function EditController($scope, $routeParams, $location, NewsService) {
+// function EditController($scope, $routeParams, $location, NewsService) {
 
-    $scope.newsEntry = NewsService.get({
-        id: $routeParams.id
-    });
+//     $scope.newsEntry = NewsService.get({
+//         id: $routeParams.id
+//     });
 
-    $scope.save = function() {
-        $scope.newsEntry.$save(function() {
-            $location.path('/');
-        });
-    };
-};
+//     $scope.save = function() {
+//         $scope.newsEntry.$save(function() {
+//             $location.path('/');
+//         });
+//     };
+// };
 
-function CreateController($scope, $location, NewsService) {
+// function CreateController($scope, $location, NewsService) {
 
-    $scope.newsEntry = new NewsService();
+//     $scope.newsEntry = new NewsService();
 
-    $scope.save = function() {
-        $scope.newsEntry.$save(function() {
-            $location.path('/');
-        });
-    };
-};
+//     $scope.save = function() {
+//         $scope.newsEntry.$save(function() {
+//             $location.path('/');
+//         });
+//     };
+// };
 
 function LoginController($scope, $rootScope, $location, $cookieStore,
     UserService) {

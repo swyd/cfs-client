@@ -10,7 +10,7 @@
         function search(data) {
             var deferred = $q.defer();
 
-            $http.get(cbu.baseUrl + '/rest/timeslot/all/usage', {
+            $http.get(cbu.baseUrl + '/rest/timeslot/usage/all', {
                     params: data
                 })
                 .success(function(data) {

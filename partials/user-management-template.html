@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-if="$root.user.roles.ROLE_ADMIN">
+<div class="panel panel-default" ng-if="$root.user.roles.ROLE_ADMIN || $$root.user.roles.ROLE_COACH">
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-12">
@@ -32,32 +32,22 @@
                             <label>Izaberi datum pocetka i isteka clanarine:</label>
                             <input date-range-picker class="form-control date-picker" type="text" ng-model="vm.datePicker.date" />
                         </div>
-                        <div class="col-xs-12">
-                            <label class="col-xs-3" for="isActive">Da li je aktivan:
-                                <input type="checkbox" id="isActive" class="big-checkbox pull-right" name="isActive" ng-model="vm.user.isActive" ng-checked="vm.user.isActive">
-                            </label>
+                        <div class="form-group" ng-if="$root.user.roles.ROLE_ADMIN">
+                            <label for="coachId">Odaberite trenera:</label>
+                            <select ng-model="vm.timeslot.coachId" name="coachId" ng-options="key as value for (key, value) in vm.coaches">
+                            </select>
                         </div>
-                        <div class="col-xs-12">
-                            <label class="col-xs-3" for="isAdvanced">Da li je advanced:
-                                <input type="checkbox" value="" class="big-checkbox  pull-right" id="isAdvanced" name="isAdvanced" ng-model="vm.user.isAdvanced" ng-checked="vm.user.isAdvanced">
-                            </label>
-                            </br>
-                        </div>
-                        <div class="col-xs-12">
-                            <label class="col-xs-3" for="isAdmin">Da li je admin:
-                                <input type="checkbox" value="" class="big-checkbox pull-right" id="isAdmin" name="isAdmin" ng-model="vm.user.isAdmin" ng-checked="vm.user.isAdmin">
-                            </label>
-                        </div>
-                        <!-- <div class="form-group">
-                            <label class="col-sm-4" for="isAdvanced">Da li je advanced:
-                                <input type="checkbox" value="" class="form-control" id="isAdvanced" name="isAdvanced" ng-model="vm.user.isAdvanced" ng-checked="vm.user.isAdvanced">
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-4" for="isAdmin">Da li je admin:
-                                <input type="checkbox" value="" class="form-control" id="isAdmin" name="isAdmin" ng-model="vm.user.isAdmin" ng-checked="vm.user.isAdmin">
-                            </label>
-                        </div> -->
+                        <label class="" for="isActive">Da li je aktivan:
+                            <input type="checkbox" id="isActive" class="big-checkbox pull-right" name="isActive" ng-model="vm.user.isActive" ng-checked="vm.user.isActive">
+                        </label>
+                        </br>
+                        <label class="" for="isAdvanced">Da li je advanced:
+                            <input type="checkbox" value="" class="big-checkbox  pull-right" id="isAdvanced" name="isAdvanced" ng-model="vm.user.isAdvanced" ng-checked="vm.user.isAdvanced">
+                        </label>
+                        </br>
+                        <label class="" for="isAdmin">Da li je admin:
+                            <input type="checkbox" value="" class="big-checkbox pull-right" id="isAdmin" name="isAdmin" ng-model="vm.user.isAdmin" ng-checked="vm.user.isAdmin">
+                        </label>
                         <button type="button" class="btn btn-default pull-right" ng-click="vm.editingInProgress ? vm.saveEditedUser() : vm.createUser()">Sacuvaj</button>
                         <br />
                         <br />
@@ -81,6 +71,7 @@
                                     <td title="'Admin'" filter="{ isAdmin: 'text'}" sortable="'isAdmin'">{{user.isAdmin}}</td>
                                     <td title="'Datum uplate'" filter="{ datePaid: 'text'}" sortable="'datePaid'">{{user.datePaid}}</td>
                                     <td title="'Datum isteka'" filter="{ dateExpiring: 'text'}" sortable="'dateExpiring'">{{user.dateExpiring}}</td>
+                                    <td title="'Trener'" filter="{ coach: 'text'}" sortable="'coach'">{{user.coach}}</td>
                                     <td title="'Edit'">
                                         <button type="button" class="btn btn-primary" ng-click="vm.editUser(user)">Edit</button>
                                     </td>

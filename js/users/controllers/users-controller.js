@@ -4,9 +4,11 @@
 
     function controller($scope, $http, UsersService, $filter, NgTableParams) {
         var vm = this;
-        vm.user = {}, vm.users = new NgTableParams({}, {
+        vm.user = {};
+        vm.users = new NgTableParams({}, {
             dataset: null
         });
+        vm.coaches = [];
         vm.editingInProgress = false;
         vm.datePicker = {
             date: {
@@ -23,9 +25,17 @@
         activate();
 
         function activate() {
+            if(vm.coaches.length == 0){
+                UsersService.getCoaches().then(function(data)
+                {
+                    vm.coaches = data;
+                });
+            }
+
             UsersService.getUsers().then(
                 function(data) {
                     data.filter(function(el) {
+                        el.coach = vm.coaches[el.coachId];
                         el.datePaid = $filter('date')(el.datePaid,
                             "yyyy-MM-dd");
                         el.dateExpiring = $filter('date')(el.dateExpiring,
@@ -103,8 +113,6 @@
         }
 
         function saveEditedUser() {
-            console.log(vm.datePicker.date.endDate);
-            console.log(vm.datePicker.date.startDate);
             vm.user.dateExpiring = vm.datePicker.date.endDate;
             vm.user.datePaid = vm.datePicker.date.startDate;
             UsersService.editUser(vm.user).then(function(data) {

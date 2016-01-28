@@ -44,7 +44,7 @@
         function findAllTimeSlotUsage(query) {
             var deferred = $q.defer();
 
-            $http.get(cbu.baseUrl + '/rest/timeslot/usage/all', {
+            $http.get(cbu.baseUrl + '/rest/timeslot/usage/all/forDate', {
                     params: query
                 })
                 .success(function(data) {

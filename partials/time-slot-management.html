@@ -1,0 +1,65 @@
+<div class="panel panel-default" ng-if="$root.user.roles.ROLE_ADMIN || $$root.user.roles.ROLE_COACH">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Pocinje u:</label>
+                    <input type="text" class="form-control" name="startsAt" ng-model="vm.timeslot.startsAt">
+                </div>
+                <div class="form-group">
+                    <label>Broj posetioca:</label>
+                    <input type="number" class="form-control" name="limit" ng-model="vm.timeslot.limit">
+                </div>
+                <div class="form-group">
+                    <label>Prioritet termina ?(sto veci broj to nizi prioritet)</label>
+                    <input type="number" class="form-control" name="priority" ng-model="vm.timeslot.priority">
+                </div>
+                <div class="form-group">
+                    <label for="type">Odaberite tip termina:</label>
+                    <select ng-model="vm.timeslot.type" name="type" ng-options="key as value for (key, value) in vm.types">
+                    </select>
+                </div>
+                <div class="form-group" ng-if="$root.user.roles.ROLE_ADMIN">
+                    <label for="coachId">Odaberite trenera:</label>
+                    <select ng-model="vm.timeslot.coachId" name="coachId" ng-options="key as value for (key, value) in vm.coaches">
+                    </select>
+                </div>
+                <label for="isActive">Da li je termin aktivan ?
+                    <input type="checkbox" value="" class="big-checkbox  pull-right" id="isActive" name="isActive" ng-model="vm.timeslot.isActive" ng-checked="vm.timeslot.isActive">
+                </label>
+                </br>
+                <label for="isAdmin">Da li je termin za advanced ?
+                    <input type="checkbox" value="" class="big-checkbox  pull-right" id="isAdvanced" name="isAdvanced" ng-model="vm.timeslot.isAdvanced" ng-checked="vm.timeslot.isAdvanced">
+                </label>
+                <button type="button" class="btn btn-default pull-right" ng-click="vm.editingInProgress ? vm.saveEditedTimeslot() : vm.createTimeSlot()">Sacuvaj</button>
+                <br />
+                <br />
+                <br />
+                <div class="col-xs-12">
+                    <h3>Odaberi kolone za prikaz</h3>
+                    <div style="margin-bottom: 20px">
+                        <label class="checkbox-inline" ng-repeat="col in timeslots.cols">
+                            <input type="checkbox" ng-if="col.title" ng-model-options="{ getterSetter: true }" ng-model="col.show" /> {{col.title()}}
+                        </label>
+                    </div>
+                    </br>
+                    <table ng-table="vm.timeslots" class="ui table compact inverted segment" show-filter="true" ng-table-columns-binding="timeslots.cols">
+                        <tr ng-repeat="timeslot in $data">
+                            <td title="'Pocinje u'" filter="{ startsAt : 'text'}" sortable="'startsAt'">{{timeslot.startsAt}}h</td>
+                            <td title="'Broj posetioca'" filter="{ limit: 'number'}" sortable="'limit'">{{timeslot.limit}}</td>
+                            <td title="'Prioritet termina'" filter="{ priority : 'number'}" sortable="'priority'">{{timeslot.priority}}</td>
+                            <td title="'Da li je aktivan'" filter="{ isActive: 'text'}" sortable="'isActive'">{{timeslot.isActive}}</td>
+                            <td title="'Da li je advanced'" filter="{ isAdvanced: 'text'}" sortable="'isAdvanced'">{{timeslot.isAdvanced}}</td>
+                            <td title="'Edit'">
+                                <button type="button" class="btn btn-primary" ng-click="vm.editTimeslot(timeslot)">Edit</button>
+                            </td>
+                            <td title="'Delete'">
+                                <button type="button" class="btn btn-danger" ng-confirm-click="Da li ste sigurni da zelite da obrisete ovaj termin ?" confirmed-click="vm.deleteTimeSlot(timeslot.id)">Del</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
