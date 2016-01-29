@@ -60,6 +60,7 @@
                 vm.user.isAdmin = null;
                 vm.user.isActive = null;
                 vm.user.datePaid = null;
+                vm.user.coachId = null;
                 vm.user.dateExpiring = null;
                 vm.user.isAdvanced = null;
                 vm.datePicker.date.startDate = null;
@@ -81,6 +82,7 @@
                 vm.user.isAdmin = null;
                 vm.user.isActive = null;
                 vm.user.isAdvanced = null;
+                vm.user.coachId = null;
                 vm.user.datePaid = null;
                 vm.user.dateExpiring = null;
                 vm.user.id = null;
@@ -106,6 +108,7 @@
             vm.user.isAdmin = user.isAdmin;
             vm.user.isActive = user.isActive;
             vm.user.isAdvanced = user.isAdvanced;
+            vm.user.coachId = String(user.coachId);
             vm.datePicker.date.startDate = moment(Date.parse(user.datePaid));
             vm.datePicker.date.endDate = moment(Date.parse(user.dateExpiring));
             vm.user.id = user.id;
@@ -129,6 +132,7 @@
                 vm.user.isAdvanced = null;
                 vm.user.datePaid = null;
                 vm.user.dateExpiring = null;
+                vm.user.coachId = null;
                 vm.user.id = null;
                 vm.datePicker.date.startDate = null;
                 vm.datePicker.date.endDate = null;

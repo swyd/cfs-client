@@ -13,6 +13,8 @@
         vm.types = [];
 
         vm.editingInProgress = false;
+
+        vm.reset = reset;
         vm.createTimeslot = createTimeslot;
         vm.editTimeslot = editTimeslot;
         vm.saveEditedTimeslot = saveEditedTimeslot;
@@ -37,12 +39,27 @@
                     data.filter(function(el) {
                         el.coach = vm.coaches[el.coachId];
                         el.tip = vm.types[el.type];
+                        el.startsAt = parseInt(el.startsAt);
                     });
 
                     vm.timeslots = new NgTableParams({}, {
                         dataset: data
                     });
                 });
+        }
+
+        function reset() {
+            if (vm.editingInProgress) {
+                vm.editingInProgress = false;
+            }
+            vm.timeslot.id = null;
+            vm.timeslot.limit = null;
+            vm.timeslot.startsAt = null;
+            vm.timeslot.isAdvanced = null;
+            vm.timeslot.isActive = null;
+            vm.timeslot.priority = null;
+            vm.timeslot.type = null;
+            vm.timeslot.coachId = null;
         }
 
         function createTimeslot() {

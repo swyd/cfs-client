@@ -28,7 +28,7 @@
                     <li><a ng-click="checkCollapsed()" href="#!/">Pocetna</a></li>
                     <li><a ng-click="checkCollapsed()" href="#!/time-slots">Treninzi</a></li>
                     <li ng-if="$root.user.roles.ROLE_ADMIN || $root.user.roles.ROLE_COACH"><a ng-click="checkCollapsed()" href="#!/training-management">Pregled treninga</a></li>
-                    <li ng-if="$root.user.roles.length() > 0"><a ng-click="checkCollapsed()" href="#!/manage-account">Nalog</a></li>
+                    <li ng-if="$root.user.roles.ROLE_USER"><a ng-click="checkCollapsed()" href="#!/manage-account">Nalog</a></li>
                     <li ng-if="$root.user.roles.ROLE_ADMIN || $root.user.roles.ROLE_COACH"><a ng-click="checkCollapsed()" href="#!/user-management">Korisnici</a></li>
                     <li ng-if="$root.user.roles.ROLE_ADMIN || $root.user.roles.ROLE_COACH"><a ng-click="checkCollapsed()" href="#!/time-slot-management">Termini</a></li>
                 </ul>

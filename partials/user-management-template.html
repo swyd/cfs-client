@@ -26,15 +26,15 @@
                         </div>
                         <div class="form-group">
                             <label>Broj treninga:</label>
-                            <input type="text" class="form-control" name="name" ng-model="vm.user.sessionsLeft">
+                            <input type="number" class="form-control" name="name" ng-model="vm.user.sessionsLeft">
                         </div>
                         <div class="form-group">
                             <label>Izaberi datum pocetka i isteka clanarine:</label>
                             <input date-range-picker class="form-control date-picker" type="text" ng-model="vm.datePicker.date" />
                         </div>
-                        <div class="form-group" ng-if="$root.user.roles.ROLE_ADMIN">
+                        <div class="form-group" ng-if="$root.user.roles.ROLE_ADMIN || $root.user.roles.ROLE_COACH">
                             <label for="coachId">Odaberite trenera:</label>
-                            <select ng-model="vm.timeslot.coachId" name="coachId" ng-options="key as value for (key, value) in vm.coaches">
+                            <select ng-model="vm.user.coachId" name="coachId" ng-options="key as value for (key, value) in vm.coaches">
                             </select>
                         </div>
                         <label class="" for="isActive">Da li je aktivan:
@@ -48,7 +48,7 @@
                         <label class="" for="isAdmin">Da li je admin:
                             <input type="checkbox" value="" class="big-checkbox pull-right" id="isAdmin" name="isAdmin" ng-model="vm.user.isAdmin" ng-checked="vm.user.isAdmin">
                         </label>
-                        <button type="button" class="btn btn-default pull-right" ng-click="vm.editingInProgress ? vm.saveEditedUser() : vm.createUser()">Sacuvaj</button>
+                        <button type="button" class="btn btn-custom-large pull-right" ng-click="vm.editingInProgress ? vm.saveEditedUser() : vm.createUser()">Sacuvaj</button>
                         <br />
                         <br />
                         <br />

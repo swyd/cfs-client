@@ -4,7 +4,7 @@
             <div class="col-xs-12">
                 <div class="form-group">
                     <label>Pocinje u:</label>
-                    <input type="text" class="form-control" style="width:50% !important;" name="startsAt" ng-model="vm.timeslot.startsAt">
+                    <input type="number" class="form-control" style="width:50% !important;" name="startsAt" ng-model="vm.timeslot.startsAt">
                 </div>
                 <div class="form-group">
                     <label>Broj posetioca:</label>
@@ -31,7 +31,8 @@
                 <label for="isAdmin">Da li je termin za advanced ?
                     <input type="checkbox" value="" class="big-checkbox  pull-right" id="isAdvanced" name="isAdvanced" ng-model="vm.timeslot.isAdvanced" ng-checked="vm.timeslot.isAdvanced">
                 </label>
-                <button type="button" class="btn btn-default pull-right" ng-click="vm.editingInProgress ? vm.saveEditedTimeslot() : vm.createTimeSlot()">Sacuvaj</button>
+                <button type="button" class="btn btn-custom-large pull-right" ng-click="vm.reset()">Resetuj</button>
+                <button type="button" class="btn btn-custom-large pull-right" ng-click="vm.editingInProgress ? vm.saveEditedTimeslot() : vm.createTimeslot()">Sacuvaj</button>
                 <br />
                 <br />
                 <br />
