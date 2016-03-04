@@ -1,6 +1,6 @@
 angular
     .module(
-        'csf', ['ngRoute', 'ui.bootstrap', 'ngCookies', 'ngMessages',
+        'csf', ['ngRoute', 'ng-bootstrap-datepicker', 'ngCookies', 'ngMessages',
             'csf.services', 'daterangepicker', 'ngTable'
         ])
     .constant('cbu', {
@@ -200,7 +200,6 @@ angular
             $rootScope.isCollapsed = true;
 
             $rootScope.checkCollapsed = function() {
-                console.log($rootScope.isCollapsed);
                 $rootScope.isCollapsed = !$rootScope.isCollapsed;
             };
         });

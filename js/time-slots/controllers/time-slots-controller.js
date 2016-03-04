@@ -23,8 +23,9 @@
         vm.render = render;
         vm.setDate = setDate;
         vm.getAvailableDates = getAvailableDates;
+        vm.renderAdmin = renderAdmin;
 
-        render(vm.date);
+        activate();
 
         function setDate(date) {
             vm.date = moment(date, "DD-MM-YYYY").format("DD-MM-YYYY");
@@ -33,24 +34,45 @@
         function getAvailableDates() {
             vm.trainingDates.trainingDates = [];
             var now = new Date();
-            if (now.getHours() >= 15 && now.getHours() < 24) {
-                // just tommorow enabled
-                vm.trainingDates.trainingDates.push({
-                    "startsAt": moment().format("DD-MM-YYYY")
-                });
-                vm.trainingDates.trainingDates.push({
-                    "startsAt": moment().add(1, 'days').format("DD-MM-YYYY")
-                });
-            } else {
-                // today and tommorow
-                vm.trainingDates.trainingDates.push({
-                    "startsAt": moment().format("DD-MM-YYYY")
-                });
-                vm.trainingDates.trainingDates.push({
-                    "startsAt": moment().add(1, 'days').format("DD-MM-YYYY")
-                });
-                return vm.trainingDates;
+
+            vm.trainingDates.trainingDates.push({
+                "startsAt": moment().format("DD-MM-YYYY")
+            });
+            vm.trainingDates.trainingDates.push({
+                "startsAt": moment().add(1, 'days').format("DD-MM-YYYY")
+            });
+        }
+
+
+        function getAvailableDatesForAdmin() {
+            var now = moment();
+            var end = moment().add(6, 'days');
+
+            vm.trainingDates.trainingDates = [];
+
+            while (now.dayOfYear() <= end.dayOfYear()) {
+                if (now.day() != 0) {
+                    vm.trainingDates.trainingDates.push({
+                        "startsAt": now.format("DD-MM-YYYY")
+                    });
+                }
+                now.add(1, 'days');
             }
+            return vm.trainingDates;
+        }
+
+        function activate() {
+            if ($scope.user && $scope.user.isAdmin) {
+                renderAdmin();
+            } else {
+                render(vm.date);
+            }
+        }
+
+        function renderAdmin() {
+            getAvailableDatesForAdmin();
+            findAllTimeSlotUsageForDate(vm.date);
+            findAllWithRemainingForDate(vm.date);
         }
 
         function render(date) {
@@ -61,14 +83,14 @@
 
         function cancelAppointment(appointmentId) {
             TimeSlotsService.cancelAppointment(appointmentId).then(function() {
-                render(vm.date);
+                activate()
             });
         }
 
         function createAppointment(timeSlotId) {
             TimeSlotsService.createAppointment(timeSlotId, vm.date).then(
                 function() {
-                    render(vm.date);
+                    activate();
                 });
         }
 
