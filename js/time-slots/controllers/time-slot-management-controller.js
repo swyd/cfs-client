@@ -39,7 +39,7 @@
                     data.filter(function(el) {
                         el.coach = vm.coaches[el.coachId];
                         el.tip = vm.types[el.type];
-                        el.startsAt = parseInt(el.startsAt);
+                        el.startsAt = el.startsAt;
                     });
 
                     vm.timeslots = new NgTableParams({}, {

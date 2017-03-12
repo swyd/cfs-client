@@ -1,6 +1,6 @@
 angular
     .module(
-        'csf', ['ngRoute', 'ng-bootstrap-datepicker', 'ngCookies', 'ngMessages',
+        'csf', ['ngRoute', 'ui.bootstrap', 'ng-bootstrap-datepicker', 'ngCookies', 'ngMessages',
             'csf.services', 'daterangepicker', 'ngTable'
         ])
     .constant('cbu', {

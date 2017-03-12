@@ -98,12 +98,7 @@
             TimeSlotsService.findAllWithRemaining({
                 forDate: date
             }).then(function(data) {
-                // var now = moment(date, 'DD-MM-YYYY');
-               // if (now.day() == 5) {
-               //      vm.timeSlotsWithRemaining = [];
-               //  } else {
-                    vm.timeSlotsWithRemaining = data;
-                // }
+                vm.timeSlotsWithRemaining = data;
             });
         }
 
